@@ -1,0 +1,41 @@
+package aplication.sprint.controlador;
+
+import aplication.sprint.service.UsuarioServiceIm;
+import aplication.sprint.web.dto.UsuarioRequest;
+import aplication.sprint.web.dto.UsuarioResponse;
+import jakarta.validation.Valid;
+import java.util.List;
+import org.springframework.http.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+
+@RestController
+@RequestMapping("/api/usuario")
+public class UsuarioControlador {
+    
+    private final UsuarioServiceIm service;
+
+    
+    
+    public UsuarioControlador(UsuarioServiceIm service) {
+        this.service = service;
+    }
+    
+    @PostMapping
+    public ResponseEntity <UsuarioResponse>crear(@Valid  @RequestBody  UsuarioRequest req ){
+    var res = service.crear(req);
+    return ResponseEntity.status(HttpStatus.CREATED).body(res);
+    }
+    
+    @GetMapping
+    public ResponseEntity<List<UsuarioResponse> > listar(){
+        return ResponseEntity.ok(service.listar());
+    
+    }
+    
+
+}

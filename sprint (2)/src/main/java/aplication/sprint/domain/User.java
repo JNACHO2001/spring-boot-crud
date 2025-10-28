@@ -22,8 +22,7 @@ public class User {
     
     
 
-    public User(int id, String nombre, int edad, String email, Long telefono) {
-        this.id = id;
+    public User( String nombre, int edad, String email, Long telefono) {
         this.nombre = nombre;
         this.edad = edad;
         this.email = email;

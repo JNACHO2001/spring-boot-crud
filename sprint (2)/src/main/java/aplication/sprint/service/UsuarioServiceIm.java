@@ -5,7 +5,10 @@ import aplication.sprint.repository.UsuarioRepository;
 import aplication.sprint.web.dto.UsuarioRequest;
 import aplication.sprint.web.dto.UsuarioResponse;
 import java.util.List;
+import org.springframework.stereotype.Service;
 
+
+@Service
 public class UsuarioServiceIm implements UsuarioService{
     
     private final UsuarioRepository repo;
@@ -19,20 +22,22 @@ public class UsuarioServiceIm implements UsuarioService{
     @Override
     public UsuarioResponse crear(UsuarioRequest req) {
         
-        if (repo.existeNombre(req.getNombre())) {
+        if (repo.existsByNombreIgnoreCase(req.getNombre())) {
             throw new IllegalArgumentException("nombre duplicado");
             
         }
         
-        var e = new User();
-        e.setNombre(req.getNombre());
-        e.setEdad(req.getEdad());
-        e.setEmail(req.getEmail());
-        e.setTelefono(req.getTelefono());
+        var user = new User(req.getNombre(), req.getEdad(), req.getEmail(), req.getTelefono());
+       var saved = repo.save(user);
         
-        var save =repo.save(e);
-        return  new UsuarioResponse(save.getNombre(),save.getEdad(),save.getEmail(),save.getTelefono());
-                
+       
+              return new UsuarioResponse(
+        saved.getId(),
+        saved.getNombre(),
+        saved.getEdad(),
+        saved.getEmail(),
+        saved.getTelefono()
+    );
         
     }
 
@@ -43,7 +48,9 @@ public class UsuarioServiceIm implements UsuarioService{
 
     @Override
     public List<UsuarioResponse> listar() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return  repo.findAll().stream()
+                .map(e -> new UsuarioResponse(e.getId(),e.getNombre(),e.getEdad(), e.getEmail(),e.getTelefono()))
+                .toList();
     }
 
 }

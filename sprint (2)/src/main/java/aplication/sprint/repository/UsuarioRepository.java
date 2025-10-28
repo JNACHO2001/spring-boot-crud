@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UsuarioRepository extends JpaRepository<User, Integer> {
     
-    boolean existeNombre(String nombre);
+boolean existsByNombreIgnoreCase(String nombre);
+
     
 }

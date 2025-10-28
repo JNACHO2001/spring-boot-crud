@@ -1,20 +1,27 @@
 package aplication.sprint.web.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class UsuarioRequest {
     
-   
+   private int id;
     @NotBlank(message = "nombre obligatorio")
      private String nombre;
-    @NotBlank(message = "edad obligatorio")
+    @NotNull(message = "edad obligatorio")
     private int edad;
     @NotBlank(message = "email obligatorio")
     private String email;
-    @NotBlank(message = "telefono obligatorio")
+    @NotNull(message = "telefono obligatorio")
     private Long telefono;
 
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNombre() {
         return nombre;
@@ -47,6 +54,10 @@ public class UsuarioRequest {
     public void setTelefono(Long telefono) {
         this.telefono = telefono;
     }
+
+
+
+   
     
     
 
