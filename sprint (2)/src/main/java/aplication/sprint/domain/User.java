@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -20,8 +21,8 @@ public class User {
     private String email;
     private Long telefono;
     
-       @OneToMany(mappedBy ="participante",cascade = CascadeType.ALL,orphanRemoval = true )
-     private List<Inscripcion>inscripciones;
+       @OneToMany(mappedBy ="user",cascade = CascadeType.ALL,orphanRemoval = true )
+     private List<Inscripcion>inscripciones = new ArrayList<>();
 
     public User() {
     }
@@ -31,7 +32,7 @@ public class User {
         this.edad = edad;
         this.email = email;
         this.telefono = telefono;
-        List<Inscripcion> inscripciones
+      
     }
 
     public int getId() {
@@ -81,7 +82,8 @@ public class User {
     public void setInscripciones(List<Inscripcion> inscripciones) {
         this.inscripciones = inscripciones;
     }
-    
+
+
     
 
 

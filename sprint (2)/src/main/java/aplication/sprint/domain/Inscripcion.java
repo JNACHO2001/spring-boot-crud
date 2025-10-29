@@ -19,14 +19,19 @@ public class Inscripcion {
     
     @ManyToOne
     @JoinColumn(name = "evento_id",referencedColumnName = "id",  nullable = false)
-    private Events event;
+    private Event event;
     
     
     @ManyToOne
     @JoinColumn(name = "participante_id",referencedColumnName = "id",nullable = false)
     private User user;
 
-    public Inscripcion(LocalDate fechaInscripcion, Events event, User user) {
+    public Inscripcion() {
+    }
+    
+    
+
+    public Inscripcion(LocalDate fechaInscripcion, Event event, User user) {
         this.fechaInscripcion = fechaInscripcion;
         this.event = event;
         this.user = user;
@@ -48,11 +53,11 @@ public class Inscripcion {
         this.fechaInscripcion = fechaInscripcion;
     }
 
-    public Events getEvent() {
+    public Event getEvent() {
         return event;
     }
 
-    public void setEvent(Events event) {
+    public void setEvent(Event event) {
         this.event = event;
     }
 

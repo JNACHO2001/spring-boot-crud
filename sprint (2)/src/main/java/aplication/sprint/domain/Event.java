@@ -7,11 +7,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 
 @Entity
-public class Events {
+public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -19,18 +20,18 @@ public class Events {
     private LocalDate fechaEvento;
      private String ubicacion;
      
-     @OneToMany(mappedBy ="evento",cascade = CascadeType.ALL,orphanRemoval = true )
-     private List<Inscripcion>inscripciones;
+     @OneToMany(mappedBy ="event",cascade = CascadeType.ALL,orphanRemoval = true )
+     private List<Inscripcion>inscripciones = new ArrayList<>();
 
-    public Events() {
+    public Event() {
     }
 
-    public Events(String nombre, LocalDate fechaEvento, String ubicacion, List<Inscripcion> inscripciones) {
+    public Event(String nombre, LocalDate fechaEvento, String ubicacion) {
 
         this.nombre = nombre;
         this.fechaEvento = fechaEvento;
         this.ubicacion = ubicacion;
-        this.inscripciones = inscripciones;
+        
     }
 
     public int getId() {
@@ -72,6 +73,7 @@ public class Events {
     public void setInscripciones(List<Inscripcion> inscripciones) {
         this.inscripciones = inscripciones;
     }
+
 
 
      
