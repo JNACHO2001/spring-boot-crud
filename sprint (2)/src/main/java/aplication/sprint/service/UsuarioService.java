@@ -8,5 +8,7 @@ public interface UsuarioService {
     UsuarioResponse crear(UsuarioRequest req);
     UsuarioResponse obtenerPorId(Integer id);
     List<UsuarioResponse> listar();
+    public void eliminar(Integer id);
+    
 
 }

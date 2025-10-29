@@ -5,6 +5,7 @@ import aplication.sprint.repository.UsuarioRepository;
 import aplication.sprint.web.dto.UsuarioRequest;
 import aplication.sprint.web.dto.UsuarioResponse;
 import java.util.List;
+import java.util.NoSuchElementException;
 import org.springframework.stereotype.Service;
 
 
@@ -32,7 +33,6 @@ public class UsuarioServiceIm implements UsuarioService{
         
        
               return new UsuarioResponse(
-        saved.getId(),
         saved.getNombre(),
         saved.getEdad(),
         saved.getEmail(),
@@ -43,14 +43,31 @@ public class UsuarioServiceIm implements UsuarioService{
 
     @Override
     public UsuarioResponse obtenerPorId(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        var user = repo.findById(id).orElseThrow(() -> new NoSuchElementException("usuario no encontradoi"));
+        return  new UsuarioResponse(user.getNombre(),user.getEdad(), user.getEmail(),user.getTelefono());
+       
     }
 
     @Override
     public List<UsuarioResponse> listar() {
         return  repo.findAll().stream()
-                .map(e -> new UsuarioResponse(e.getId(),e.getNombre(),e.getEdad(), e.getEmail(),e.getTelefono()))
+                .map(e -> new UsuarioResponse(e.getNombre(),e.getEdad(), e.getEmail(),e.getTelefono()))
                 .toList();
     }
+
+   @Override
+public void eliminar(Integer id) {
+    // Busca el usuario por ID (devuelve un Optional)
+    var user = repo.findById(id);
+
+    // Si no se encuentra, lanza una excepción
+    if (user.isEmpty()) {
+        throw new NoSuchElementException("Usuario no encontrado");
+    }
+
+    // Si se encuentra, lo elimina
+    repo.deleteById(id);
+}
+
 
 }

@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotNull;
 
 public class UsuarioRequest {
     
-   private int id;
+  //private int id;
     @NotBlank(message = "nombre obligatorio")
      private String nombre;
     @NotNull(message = "edad obligatorio")
@@ -14,7 +14,7 @@ public class UsuarioRequest {
     private String email;
     @NotNull(message = "telefono obligatorio")
     private Long telefono;
-
+/*  
     public int getId() {
         return id;
     }
@@ -22,6 +22,7 @@ public class UsuarioRequest {
     public void setId(int id) {
         this.id = id;
     }
+  */
 
     public String getNombre() {
         return nombre;

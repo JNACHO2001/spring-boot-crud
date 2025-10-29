@@ -1,27 +1,21 @@
 package aplication.sprint.web.dto;
 
 public class UsuarioResponse {
-    private int id;
+   
      private String nombre;
     private int edad;
     private String email;
     private Long telefono;
 
-    public UsuarioResponse(int id, String nombre, int edad, String email, Long telefono) {
-        this.id = id;
+    public UsuarioResponse(String nombre, int edad, String email, Long telefono) {
+        
         this.nombre = nombre;
         this.edad = edad;
         this.email = email;
         this.telefono = telefono;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+  
 
     public String getNombre() {
         return nombre;

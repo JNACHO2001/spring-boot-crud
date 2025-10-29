@@ -6,32 +6,31 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import java.time.LocalDate;
 import java.util.List;
 
 
 @Entity
-public class User {
-    
+public class Events {
     @Id
-    @GeneratedValue(strategy =GenerationType.IDENTITY)
-    private int id ;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String nombre;
-    private int edad;
-    private String email;
-    private Long telefono;
-    
-       @OneToMany(mappedBy ="participante",cascade = CascadeType.ALL,orphanRemoval = true )
+    private LocalDate fechaEvento;
+     private String ubicacion;
+     
+     @OneToMany(mappedBy ="evento",cascade = CascadeType.ALL,orphanRemoval = true )
      private List<Inscripcion>inscripciones;
 
-    public User() {
+    public Events() {
     }
 
-    public User(String nombre, int edad, String email, Long telefono) {
+    public Events(String nombre, LocalDate fechaEvento, String ubicacion, List<Inscripcion> inscripciones) {
+
         this.nombre = nombre;
-        this.edad = edad;
-        this.email = email;
-        this.telefono = telefono;
-        List<Inscripcion> inscripciones
+        this.fechaEvento = fechaEvento;
+        this.ubicacion = ubicacion;
+        this.inscripciones = inscripciones;
     }
 
     public int getId() {
@@ -50,28 +49,20 @@ public class User {
         this.nombre = nombre;
     }
 
-    public int getEdad() {
-        return edad;
+    public LocalDate getFechaEvento() {
+        return fechaEvento;
     }
 
-    public void setEdad(int edad) {
-        this.edad = edad;
+    public void setFechaEvento(LocalDate fechaEvento) {
+        this.fechaEvento = fechaEvento;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUbicacion() {
+        return ubicacion;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Long getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(Long telefono) {
-        this.telefono = telefono;
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
     }
 
     public List<Inscripcion> getInscripciones() {
@@ -81,10 +72,10 @@ public class User {
     public void setInscripciones(List<Inscripcion> inscripciones) {
         this.inscripciones = inscripciones;
     }
-    
-    
 
 
+     
+     
     
 
 }
