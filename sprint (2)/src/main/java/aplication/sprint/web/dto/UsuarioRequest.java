@@ -9,7 +9,7 @@ public class UsuarioRequest {
     @NotBlank(message = "nombre obligatorio")
      private String nombre;
     @NotNull(message = "edad obligatorio")
-    private int edad;
+    private Integer edad;
     @NotBlank(message = "email obligatorio")
     private String email;
     @NotNull(message = "telefono obligatorio")
