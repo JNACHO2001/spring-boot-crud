@@ -2,8 +2,11 @@ package aplication.sprint.service;
 
 import aplication.sprint.domain.User;
 import aplication.sprint.repository.UsuarioRepository;
+import aplication.sprint.web.dto.EventResponse;
+
 import aplication.sprint.web.dto.UsuarioRequest;
 import aplication.sprint.web.dto.UsuarioResponse;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
 import org.springframework.stereotype.Service;
@@ -68,6 +71,30 @@ public void eliminar(Integer id) {
     // Si se encuentra, lo elimina
     repo.deleteById(id);
 }
+
+    @Override
+    public UsuarioResponse editar(Integer id, UsuarioRequest req) {
+        var user =repo.findById(id).orElseThrow(()-> new NoSuchElementException(" no encontrado")  );
+        
+        if (repo.existsByNombreIgnoreCase(req.getNombre())) {
+                    throw  new IllegalArgumentException("nombre duplicado");
+            
+            
+        }
+        
+        user.setNombre(req.getNombre());
+        user.setEdad(req.getEdad());
+        user.setEmail(req.getEmail());
+        user.setTelefono(req.getTelefono());
+        
+        var newUser = repo.save(user);
+        return new UsuarioResponse(newUser.getNombre(),newUser.getEdad(),newUser.getEmail(),newUser.getTelefono());
+        
+        
+        
+    }
+
+   
 
 
 }

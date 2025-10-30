@@ -4,7 +4,6 @@ import aplication.sprint.domain.Event;
 import aplication.sprint.repository.EventRepository;
 import aplication.sprint.web.dto.EventRequest;
 import aplication.sprint.web.dto.EventResponse;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -60,6 +59,25 @@ public class EventServiceIm implements EventService {
         }
         
         repo.deleteById(id);
+    }
+    
+     @Override
+    public EventResponse editar(Integer id, EventRequest req) {
+        var event =repo.findById(id).orElseThrow(() -> new NoSuchElementException("no econtrado"));
+        
+        if (repo.existsByNombreIgnoreCase(req.getNombre())) {
+            throw  new IllegalArgumentException("nombre duplicado");
+            
+        }
+        
+        event.setNombre(req.getNombre());
+        event.setFechaEvento(req.getFechaEvento());
+        event.setUbicacion(req.getUbicacion());
+        
+        var newEvent = repo.save(event);
+        
+        return new EventResponse(newEvent.getNombre(),newEvent.getFechaEvento(),newEvent.getUbicacion());
+        
     }
     
 }

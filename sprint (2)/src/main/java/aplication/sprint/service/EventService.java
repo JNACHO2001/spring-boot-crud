@@ -9,7 +9,7 @@ public interface EventService {
     EventResponse obtenerPorId(Integer id);
     List<EventResponse>listar();
     public void Eliminar(Integer id );
-    
+       EventResponse editar(Integer id, EventRequest req);
     
 
 }
