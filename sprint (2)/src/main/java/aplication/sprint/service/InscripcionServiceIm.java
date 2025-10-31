@@ -9,6 +9,7 @@ import aplication.sprint.repository.IncripcionRepository;
 import aplication.sprint.repository.UsuarioRepository;
 import aplication.sprint.web.dto.InscripcionResponse;
 import aplication.sprint.web.dto.InscrpcionRequest;
+import java.util.List;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -37,6 +38,13 @@ public class InscripcionServiceIm implements InscripcionService {
         var save = repoIns.save(inscripcion);
         return new InscripcionResponse(save.getFechaInscripcion(), save.getUser().getNombre(), save.getEvent().getNombre());
 
+    }
+
+    @Override
+    public List<InscripcionResponse> listar() {
+        return repoIns.findAll().stream()
+                .map(i -> new InscripcionResponse(i.getFechaInscripcion(),i.getUser().getNombre(),i.getEvent().getNombre())
+                .
     }
 
 }
