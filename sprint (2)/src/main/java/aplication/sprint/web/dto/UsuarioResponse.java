@@ -15,6 +15,11 @@ public class UsuarioResponse {
         this.telefono = telefono;
     }
 
+    public UsuarioResponse() {
+    }
+    
+    
+
   
 
     public String getNombre() {
