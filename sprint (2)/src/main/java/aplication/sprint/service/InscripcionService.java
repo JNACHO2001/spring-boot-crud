@@ -8,6 +8,7 @@ public interface InscripcionService {
     
     InscripcionResponse crear(InscrpcionRequest req);
     List<InscripcionResponse>listar();
+    public void eliminar(Integer id);
     
     
 

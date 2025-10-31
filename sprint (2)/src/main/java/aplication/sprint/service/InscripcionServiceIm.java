@@ -9,7 +9,9 @@ import aplication.sprint.repository.IncripcionRepository;
 import aplication.sprint.repository.UsuarioRepository;
 import aplication.sprint.web.dto.InscripcionResponse;
 import aplication.sprint.web.dto.InscrpcionRequest;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -42,12 +44,39 @@ public class InscripcionServiceIm implements InscripcionService {
 
     @Override
     public List<InscripcionResponse> listar() {
-        return repoIns.findAll().stream()
-                .map(i -> new InscripcionResponse(i.getFechaInscripcion(),i.getUser().getNombre(),i.getEvent().getNombre())
-                .
-    }
+        List<Inscripcion> inscripciones = repoIns.findAll();
+        List<InscripcionResponse> respuestas = new ArrayList<>();
 
+        inscripciones.forEach(i -> {
+            InscripcionResponse response = new InscripcionResponse(
+                    i.getFechaInscripcion(),
+                    i.getUser().getNombre(),
+                    i.getEvent().getNombre()
+            );
+
+            respuestas.add(response);
+
+        });
+
+        return respuestas;
+
+      
+   
+}    
+
+    @Override
+    public void eliminar(Integer id) {
+        var inscipcion = repoIns.findById(id);
+
+        if (inscipcion.isEmpty()) {
+            throw new NoSuchElementException("Evento no encontrado");
+
+        }
+        repoIns.deleteById(id);
+    }
 }
+
+
     
 
 
