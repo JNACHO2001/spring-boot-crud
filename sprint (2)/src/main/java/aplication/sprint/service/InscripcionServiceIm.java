@@ -35,7 +35,7 @@ public class InscripcionServiceIm implements InscripcionService {
         inscripcion.setUser(user);
 
         var save = repoIns.save(inscripcion);
-        return new InscripcionResponse(save.getFechaInscripcion(), save.getUser().getId(), save.getEvent().getId());
+        return new InscripcionResponse(save.getFechaInscripcion(), save.getUser().getNombre(), save.getEvent().getNombre());
 
     }
 
