@@ -2,9 +2,10 @@ package aplication.sprint.repository;
 
 
 import aplication.sprint.domain.Inscripcion;
-import org.springframework.data.repository.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface IncripcionRepository  extends Repository<Inscripcion, Integer>{
+
+public interface IncripcionRepository  extends JpaRepository<Inscripcion, Integer>{
     
  
 
