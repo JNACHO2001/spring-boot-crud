@@ -6,13 +6,13 @@ import java.time.LocalDate;
 public class InscripcionResponse {
     
     private LocalDate fechaInscripcion;
-    private Integer user;
-    private Integer event;
+    private String nombreUser;
+    private String nombreEvento;
 
-    public InscripcionResponse(LocalDate fechaInscripcion, Integer user, Integer event) {
+    public InscripcionResponse(LocalDate fechaInscripcion, String nombreUser, String nombreEvento) {
         this.fechaInscripcion = fechaInscripcion;
-        this.user = user;
-        this.event = event;
+        this.nombreUser = nombreUser;
+        this.nombreEvento = nombreEvento;
     }
 
     public InscripcionResponse() {
@@ -26,21 +26,23 @@ public class InscripcionResponse {
         this.fechaInscripcion = fechaInscripcion;
     }
 
-    public Integer getUser() {
-        return user;
+    public String getNombreUser() {
+        return nombreUser;
     }
 
-    public void setUser(Integer user) {
-        this.user = user;
+    public void setNombreUser(String nombreUser) {
+        this.nombreUser = nombreUser;
     }
 
-    public Integer getEvent() {
-        return event;
+    public String getNombreEvento() {
+        return nombreEvento;
     }
 
-    public void setEvent(Integer event) {
-        this.event = event;
+    public void setNombreEvento(String nombreEvento) {
+        this.nombreEvento = nombreEvento;
     }
+
+   
 
    
     
