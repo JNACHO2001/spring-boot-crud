@@ -4,7 +4,11 @@ import aplication.sprint.service.InscripcionServiceIm;
 import aplication.sprint.web.dto.InscripcionResponse;
 import aplication.sprint.web.dto.InscrpcionRequest;
 import jakarta.validation.Valid;
+import java.util.List;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,5 +36,22 @@ public class InscripcionControlador {
     
     
     }    
+    
+    @GetMapping
+    public ResponseEntity <List<InscripcionResponse>>listar(){
+        return ResponseEntity.ok(service.listar());
+        
+    
+    }
+    
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String>eliminar(@PathVariable  Integer id){
+        service.eliminar(id);
+        
+        return ResponseEntity.ok("ELIMINADO");
+        
+    
+    }
+    
 
 }
