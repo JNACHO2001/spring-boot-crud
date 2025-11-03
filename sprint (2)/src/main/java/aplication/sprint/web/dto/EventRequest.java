@@ -12,6 +12,9 @@ public class EventRequest {
     private LocalDate fechaEvento;
     @NotBlank(message = " es obligatorio el campo")
     private String ubicacion;
+    
+    @NotBlank(message = "no puede estar vacio")
+    private String ciudad;
 
     public String getNombre() {
         return nombre;
@@ -35,6 +38,14 @@ public class EventRequest {
 
     public void setUbicacion(String ubicacion) {
         this.ubicacion = ubicacion;
+    }
+
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
     }
 
 }

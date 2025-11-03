@@ -26,13 +26,14 @@ public class EventServiceIm implements EventService {
 
         }
 
-        var event = new Event(req.getNombre(), req.getFechaEvento(), req.getUbicacion());
+        var event = new Event(req.getNombre(), req.getFechaEvento(), req.getUbicacion(),req.getCiudad());
         var save = repo.save(event);
 
         return new EventResponse(
                 save.getNombre(),
                 save.getFechaEvento(),
-                save.getUbicacion()
+                save.getUbicacion(),
+                save.getCiudad()
         );
     }
 
@@ -40,14 +41,14 @@ public class EventServiceIm implements EventService {
     public EventResponse obtenerPorId(Integer id) {
         var event = repo.findById(id).orElseThrow(()->new NoSuchElementException("evento no encontrado"));
         
-        return  new EventResponse(event.getNombre(),event.getFechaEvento(),event.getUbicacion());
+        return  new EventResponse(event.getNombre(),event.getFechaEvento(),event.getUbicacion(),event.getCiudad());
         
     }
 
     @Override
     public List<EventResponse> listar() {
         return repo.findAll().stream()
-                .map(event ->  new EventResponse(event.getNombre(), event.getFechaEvento(), event.getUbicacion())).toList();
+                .map(event ->  new EventResponse(event.getNombre(), event.getFechaEvento(), event.getUbicacion(),event.getCiudad())).toList();
     }
 
     @Override
@@ -76,7 +77,7 @@ public class EventServiceIm implements EventService {
         
         var newEvent = repo.save(event);
         
-        return new EventResponse(newEvent.getNombre(),newEvent.getFechaEvento(),newEvent.getUbicacion());
+        return new EventResponse(newEvent.getNombre(),newEvent.getFechaEvento(),newEvent.getUbicacion(),newEvent.getCiudad());
         
     }
     

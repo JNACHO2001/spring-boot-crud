@@ -19,6 +19,7 @@ public class Event {
     private String nombre;
     private LocalDate fechaEvento;
      private String ubicacion;
+     private String ciudad;
      
      @OneToMany(mappedBy ="event",cascade = CascadeType.ALL,orphanRemoval = true )
      private List<Inscripcion>inscripciones = new ArrayList<>();
@@ -26,12 +27,11 @@ public class Event {
     public Event() {
     }
 
-    public Event(String nombre, LocalDate fechaEvento, String ubicacion) {
-
+    public Event( String nombre, LocalDate fechaEvento, String ubicacion, String ciudad) {
         this.nombre = nombre;
         this.fechaEvento = fechaEvento;
         this.ubicacion = ubicacion;
-        
+        this.ciudad = ciudad;
     }
 
     public int getId() {
@@ -66,6 +66,14 @@ public class Event {
         this.ubicacion = ubicacion;
     }
 
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
+
     public List<Inscripcion> getInscripciones() {
         return inscripciones;
     }
@@ -73,6 +81,9 @@ public class Event {
     public void setInscripciones(List<Inscripcion> inscripciones) {
         this.inscripciones = inscripciones;
     }
+    
+    
+
 
 
 
