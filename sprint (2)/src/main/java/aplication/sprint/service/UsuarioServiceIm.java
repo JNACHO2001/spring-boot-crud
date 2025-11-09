@@ -28,6 +28,10 @@ public class UsuarioServiceIm implements UsuarioService {
             throw new IllegalArgumentException("nombre duplicado");
 
         }
+        if (repo.existsByEmailIgnoreCase(req.getEmail())) {
+               throw new IllegalArgumentException("correo duplicadp");
+            
+        }
 
         var user = new User(req.getNombre(), req.getEdad(), req.getEmail(), req.getTelefono());
         var saved = repo.save(user);

@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 public class UsuarioRequest {
     
   //private int id;
+   
     @NotBlank(message = "nombre obligatorio")
      private String nombre;
     @NotNull(message = "edad obligatorio")

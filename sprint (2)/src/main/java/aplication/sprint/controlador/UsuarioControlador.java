@@ -30,9 +30,12 @@ public class UsuarioControlador {
     }
 
     @PostMapping
-    public ResponseEntity<UsuarioResponse> crear(@Valid @RequestBody UsuarioRequest req) {
+    public ResponseEntity<ApiResponse<UsuarioResponse>> crear(@Valid @RequestBody UsuarioRequest req) {
         var res = service.crear(req);
-        return ResponseEntity.status(HttpStatus.CREATED).body(res);
+        return ResponseEntity.ok(
+                new ApiResponse<>(true,"Usuario  creado",res)
+        
+        );
     }
 
     @GetMapping
