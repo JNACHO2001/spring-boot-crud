@@ -1,6 +1,7 @@
 package aplication.sprint.controlador;
 
 import aplication.sprint.service.EventServiceIm;
+import aplication.sprint.web.dto.ApiResponse;
 import aplication.sprint.web.dto.EventRequest;
 import aplication.sprint.web.dto.EventResponse;
 import jakarta.validation.Valid;
@@ -41,9 +42,11 @@ public class EventControlador {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<EventResponse> obtener(@PathVariable Integer id) {
+    public ResponseEntity<ApiResponse<EventResponse>> obtener(@PathVariable Integer id) {
+        var event = service.obtenerPorId(id);
 
-        return ResponseEntity.ok(service.obtenerPorId(id));
+        return ResponseEntity.ok(
+                new ApiResponse<>(true, "Usuario ontenido", event));
 
     }
 

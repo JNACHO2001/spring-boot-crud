@@ -47,9 +47,13 @@ public class UsuarioControlador {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UsuarioResponse> obtener(@PathVariable Integer id) {
+    public ResponseEntity<ApiResponse<UsuarioResponse>> obtener(@PathVariable Integer id) {
 
-        return ResponseEntity.ok(service.obtenerPorId(id));
+        var user = service.obtenerPorId(id);
+
+        return ResponseEntity.ok(
+                new ApiResponse<>(true, "Usuario obtenido", user)
+        );
 
     }
 
