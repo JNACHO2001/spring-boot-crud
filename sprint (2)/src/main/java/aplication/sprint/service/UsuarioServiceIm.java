@@ -2,7 +2,7 @@ package aplication.sprint.service;
 
 import aplication.sprint.domain.User;
 import aplication.sprint.repository.UsuarioRepository;
-import aplication.sprint.web.dto.EventResponse;
+
 
 import aplication.sprint.web.dto.UsuarioRequest;
 import aplication.sprint.web.dto.UsuarioResponse;
@@ -37,6 +37,7 @@ public class UsuarioServiceIm implements UsuarioService {
         var saved = repo.save(user);
 
         return new UsuarioResponse(
+                saved.getId(),
                 saved.getNombre(),
                 saved.getEdad(),
                 saved.getEmail(),
@@ -48,7 +49,7 @@ public class UsuarioServiceIm implements UsuarioService {
     @Override
     public UsuarioResponse obtenerPorId(Integer id) {
         var user = repo.findById(id).orElseThrow(() -> new NoSuchElementException("usuario no encontradoi"));
-        return new UsuarioResponse(user.getNombre(), user.getEdad(), user.getEmail(), user.getTelefono());
+        return new UsuarioResponse(user.getEdad(),user.getNombre(), user.getEdad(), user.getEmail(), user.getTelefono());
 
     }
 
@@ -59,6 +60,7 @@ public class UsuarioServiceIm implements UsuarioService {
 
         usuarios.forEach(u -> {
             UsuarioResponse response = new UsuarioResponse(
+                    u.getId(),
                     u.getNombre(),
                     u.getEdad(),
                     u.getEmail(),
@@ -100,7 +102,7 @@ public class UsuarioServiceIm implements UsuarioService {
         user.setTelefono(req.getTelefono());
 
         var newUser = repo.save(user);
-        return new UsuarioResponse(newUser.getNombre(), newUser.getEdad(), newUser.getEmail(), newUser.getTelefono());
+        return new UsuarioResponse(newUser.getId(),newUser.getNombre(), newUser.getEdad(), newUser.getEmail(), newUser.getTelefono());
 
     }
 
